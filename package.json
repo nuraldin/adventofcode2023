@@ -1,0 +1,14 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "Small fun project to do the advent of code 2023 challenge",
+  "main": "run-advent.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "santin.martin@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.2"
+  }
+}
