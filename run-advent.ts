@@ -1,5 +1,4 @@
-import { solution as advent1 } from './src/advent-1'
-import { solution as advent2 } from './src/advent-2'
+import { advent1, advent2 } from './src/day-one'
 import { solution as advent3 } from './src/advent-3'
 import { solution as advent4 } from './src/advent-4'
 import { solution as advent5 } from './src/advent-5'

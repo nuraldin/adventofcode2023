@@ -1,4 +1,4 @@
-const input = 'six1mpffbnbnnlxthree\n'+
+export const input = 'six1mpffbnbnnlxthree\n'+
 '4eight3one92\n'+
 '9nine2xnhvjtjlzj48\n'+
 'jxrbrt4jmnmlonesznvbjrsn\n'+
@@ -998,34 +998,3 @@ const input = 'six1mpffbnbnnlxthree\n'+
 '425six14two46\n'+
 'jhctmxconelfkgmprnfourseven8twofkjvlvnjgd\n'+
 'twonrpvnnmvkh2threejzcpz';
-
-const exampleInput = 'two1nine\n'+
-'eightwothree\n'+
-'abcone2threexyz\n'+
-'xtwone3four\n'+
-'4nineeightseven2\n'+
-'zoneight234\n'+
-'7pqrstsixteen';
-
-const codeFinder = (input: string) => {
-  const inputs = input.split("\n");
-
-  console.log(inputs)
-  let acum = 0;
-  for(const input of inputs) {
-
-    let matches = input.match(/\d/gm);
-    
-    const first = matches && matches[0];    
-    const last = matches && matches[matches.length - 1];
-
-    console.log(`${first}${last}`)
-    acum += (+first! * 10) + +last!;
-  }
-
-  return acum;
-};
-
-export const solution = (): number => {
-  return codeFinder(input);
-};
