@@ -1007,7 +1007,7 @@ const exampleInput = 'two1nine\n'+
 'zoneight234\n'+
 '7pqrstsixteen';
 
-const numbers = { 
+const numbers: Record<string, number> = { 
   "one": 1 , 
   "two": 2 , 
   "three": 3, 
@@ -1019,16 +1019,16 @@ const numbers = {
   "nine": 9 
 }
 
-const firstLastDigit = (input) => {
+const firstLastDigit = (input: string) => {
   let matches = input.match(/\d/gm);
 
-  let first = 0;
-  let last = 0;
+  let first ="0";
+  let last = "0";
   let firstIdx = Infinity;
   let lastIdx = -Infinity;
   
   
-  if (matches?.length > 0) { 
+  if (matches && matches?.length > 0) { 
     first = matches[0];    
     last = matches[matches.length - 1];
     firstIdx  = input.indexOf(first);
@@ -1038,94 +1038,18 @@ const firstLastDigit = (input) => {
   return [{ first: Number(first), firstIdx }, { last: Number(last), lastIdx }];
 }
 
-const codeFinderPlus = (input) => {
+const codeFinderAdvancedPlus = (input: string) => {
   const inputs = input.split("\n");
   let acum = 0;
 
   for(const input of inputs) {
     let [bestFirst, bestLast] = firstLastDigit(input);
-    // console.log({ firstLastDigit: { bestFirst, bestLast }})
-
-    Object.keys(numbers).forEach(number => {
-      const idx = input.indexOf(number);
-
-      if ( idx >= 0 && idx < bestFirst.firstIdx) {
-        bestFirst.firstIdx = idx;
-        bestFirst.first = numbers[number]
-      } 
-      
-      if ( idx >= 0 && idx > bestLast.lastIdx ) {
-        bestLast.lastIdx = idx;
-        bestLast.last = numbers[number]
-      }
-
-    })
-
-    //console.log({ input, result: bestFirst.first * 10 +  bestLast.last })
-    acum += bestFirst.first * 10 + bestLast.last;
-  }
-
-  return acum;
-};
-
-const codeFinderAdvanced = (input) => {
-  const inputs = input.split("\n");
-  let acum = 0;
-
-  for(const input of inputs) {
-    let [bestFirst, bestLast] = firstLastDigit(input);
-    //console.log({ firstLastDigit: { bestFirst, bestLast }})
-
-    let idx = 0;
-    while( idx < input.length) {
-      let matchedKey = undefined;
-
-      for(const key of Object.keys(numbers)) {
-        const substr = input.substr(idx, key.length);
-
-        let res = substr.search(key);
-        if ( res >= 0) {
-          matchedKey = key;
-          break;
-        }
-      }
-
-      if( matchedKey ) {
-        // replace best first or last
-        if ( idx < bestFirst.firstIdx) {
-          bestFirst.firstIdx = idx;
-          bestFirst.first = numbers[matchedKey];
-        } else if ( idx > bestLast.lastIdx ) {
-          bestLast.lastIdx = idx;
-          bestLast.last = numbers[matchedKey]
-        }
-
-        idx += matchedKey.length;
-      } else { 
-        idx += 1;
-      }
-    }
-
-    //console.log({ input, result: bestFirst.first * 10 +  bestLast.last })
-    acum += bestFirst.first * 10 + bestLast.last;
-  }
-
-  return acum;
-};
-
-const codeFinderAdvancedPlus = (input) => {
-  const inputs = input.split("\n");
-  let acum = 0;
-
-  for(const input of inputs) {
-    let [bestFirst, bestLast] = firstLastDigit(input);
-    //console.log({ firstLastDigit: { bestFirst, bestLast }})
 
     for( let idx = 0; idx < input.length; idx++) {
       let matchedKey = undefined;
 
       for(const key of Object.keys(numbers)) {
-        const substr = input.substr(idx, key.length);
+        const substr = input.substring(idx, key.length);
 
         let res = substr.search(key);
         if ( res >= 0) {
@@ -1136,10 +1060,10 @@ const codeFinderAdvancedPlus = (input) => {
 
       if( matchedKey ) {
         // replace best first or last
-        if ( idx < bestFirst.firstIdx) {
+        if ( idx < bestFirst.firstIdx!) {
           bestFirst.firstIdx = idx;
           bestFirst.first = numbers[matchedKey]
-        } else if ( idx > bestLast.lastIdx ) {
+        } else if ( idx > bestLast.lastIdx! ) {
           bestLast.lastIdx = idx;
           bestLast.last = numbers[matchedKey]
         }
@@ -1147,20 +1071,12 @@ const codeFinderAdvancedPlus = (input) => {
     }
 
     //console.log({ input, result: bestFirst.first * 10 +  bestLast.last })
-    acum += bestFirst.first * 10 + bestLast.last;
+    acum += bestFirst.first! * 10 + bestLast.last!;
   }
 
   return acum;
 };
 
-const solution = () => {
-  // let result = codeFinderPlus(input); // { result: 54840 } too low
-  // console.log({ result })
-  // result = codeFinderAdvanced(input) // { result: 54871 } too high
-  // console.log({ result })
+export const solution = () => {
   return codeFinderAdvancedPlus(input); // { result: 54845 } perfect
 };
-
-module.exports = {
-  solution 
-}

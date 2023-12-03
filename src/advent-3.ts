@@ -107,13 +107,13 @@ const exampleInput =
   'Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n' +
   'Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green'
 
-const possibleValues = {
+const possibleValues: Record<string, number> = {
   red: 12,
   green: 13,
   blue: 14
 }
 
-const getCubesPower = (games) => {
+const getCubesPower = (games: Record<string, number>[][][]) => {
   let result = 0
 
   for (let idx = 0; idx < games.length; idx++) {
@@ -129,7 +129,7 @@ const getCubesPower = (games) => {
   return result
 }
 
-const parseGames = (input) => {
+const parseGames = (input: string) => {
   const gameLogEntries = input.split('\n').map(gameLogEntry => gameLogEntry.split(':')[1]) // get each line of game
 
   const gameEntryRoundsResults = gameLogEntries.map(
@@ -144,7 +144,7 @@ const parseGames = (input) => {
         gameEntryRound => {
           const [amount, color] = gameEntryRound.split(' ')
 
-          const hash = {}
+          const hash: Record<string,number> = {}
           hash[color] = Number(amount)
 
           return hash
@@ -153,16 +153,10 @@ const parseGames = (input) => {
     )
   )
 
-  // console.log(JSON.stringify(gameRoundDices))
-
   return gameRoundDices
 }
 
-const solution = () => {
+export const solution = () => {
   const games = parseGames(input)
   return getCubesPower(games)
-}
-
-module.exports = {
-  solution
 }

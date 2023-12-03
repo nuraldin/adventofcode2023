@@ -195,6 +195,29 @@ class Gear {
   }
 }
 
+class Part {
+  private digits: Digit[];
+
+  constructor(...digits: Digit[]) {
+    this.digits = digits;
+  }
+
+  get number() {
+    return this.digits.reduce((acum, currentDigit) => {
+      acum = acum * 10 + currentDigit.value;
+      return acum;
+    } , 0)
+  }
+
+  toString() {
+    return `${this.number}`;
+  }
+  
+  isAdjacent(coordinate: Coordinate) {
+    return this.digits.some(digit => digit.coordinate.isAdjacent(coordinate));
+  }
+}
+
 const getPartsAndSymbols = (input: string[]): { parts: Part[], shapes: Shape[] } => {
   const parts: Part[] = []
   const shapes: Shape[] = []

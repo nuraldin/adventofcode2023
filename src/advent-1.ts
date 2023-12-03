@@ -999,7 +999,15 @@ const input = 'six1mpffbnbnnlxthree\n'+
 'jhctmxconelfkgmprnfourseven8twofkjvlvnjgd\n'+
 'twonrpvnnmvkh2threejzcpz';
 
-const codeFinder = (input) => {
+const exampleInput = 'two1nine\n'+
+'eightwothree\n'+
+'abcone2threexyz\n'+
+'xtwone3four\n'+
+'4nineeightseven2\n'+
+'zoneight234\n'+
+'7pqrstsixteen';
+
+const codeFinder = (input: string) => {
   const inputs = input.split("\n");
 
   console.log(inputs)
@@ -1008,20 +1016,16 @@ const codeFinder = (input) => {
 
     let matches = input.match(/\d/gm);
     
-    const first = matches[0];    
-    const last = matches[ matches.length - 1];
+    const first = matches && matches[0];    
+    const last = matches && matches[matches.length - 1];
 
     console.log(`${first}${last}`)
-    acum += (+first * 10) + +last;
+    acum += (+first! * 10) + +last!;
   }
 
   return acum;
 };
 
-const solution = () => {
+export const solution = (): number => {
   return codeFinder(input);
 };
-
-module.exports = {
-  solution 
-}

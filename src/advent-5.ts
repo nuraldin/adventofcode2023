@@ -152,22 +152,10 @@ const exampleInput =
 '...$.*....\n' +
 '.664.598..'
 
-const simpleInput =
-'467..114..\n' +
-'.$.*......'
-
-const testInput =
-'4.1\n' +
-'.*.\n' +
-'...'
-
 class Coordinate {
-  constructor (row, column) {
-    this.row = row
-    this.column = column
-  }
+  constructor (public row: number, public column: number) {}
 
-  isAdjacent (coordinate) {
+  isAdjacent (coordinate: Coordinate) {
     return Math.abs(this.row - coordinate.row) <= 1 && Math.abs(this.column - coordinate.column) <= 1
   }
 
@@ -177,14 +165,13 @@ class Coordinate {
 }
 
 class Digit {
-  constructor (value, coordinate) {
-    this.value = value
-    this.coordinate = coordinate
-  }
+  constructor (public value: number, public coordinate: Coordinate) {}
 }
 
 class Part {
-  constructor (...digits) {
+  private digits: Digit[];
+
+  constructor (...digits: Digit[]) {
     this.digits = digits
   }
 
@@ -204,7 +191,7 @@ class Part {
   }
 }
 
-const getPartsAndSymbols = (input) => {
+const getPartsAndSymbols = (input: string[]) => {
   const parts = []
   const symbols = []
 
@@ -256,10 +243,10 @@ const getPartsAndSymbols = (input) => {
   }
 }
 
-const getSchematicPartsSum = (input) => {
+const getSchematicPartsSum = (input: string[]) => {
   const { parts, symbols } = getPartsAndSymbols(input)
 
-  const partNumbers = []
+  const partNumbers: Part[] = []
 
   parts.forEach(part => {
     console.log(part.toString())
@@ -274,11 +261,7 @@ const getSchematicPartsSum = (input) => {
   }, 0)
 }
 
-const solution = () => {
+export const solution = () => {
   const parsedInput = input.split('\n')
   return getSchematicPartsSum(parsedInput)
-}
-
-module.exports = {
-  solution
 }

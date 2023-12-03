@@ -107,13 +107,13 @@ const exampleInput =
   'Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n' +
   'Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green'
 
-const getCubesPower = (games) => {
+const getCubesPower = (games: Record<string, number>[][][]) => {
   let result = 0
 
   for (let idx = 0; idx < games.length; idx++) {
     const game = games[idx]
 
-    const minimums = {
+    const minimums: Record<string, number> = {
       red: 0,
       blue: 0,
       green: 0
@@ -127,19 +127,14 @@ const getCubesPower = (games) => {
       })
     }))
 
-    // console.log({ minimums });
-
     const power = Object.values(minimums).reduce((acum, minimum) => acum * minimum, 1)
-
-    // console.log({ power });
-
     result += power
   }
 
   return result
 }
 
-const parseGames = (input) => {
+const parseGames = (input: string) => {
   const gameLogEntries = input.split('\n').map(gameLogEntry => gameLogEntry.split(':')[1]) // get each line of game
 
   const gameEntryRoundsResults = gameLogEntries.map(
@@ -154,7 +149,7 @@ const parseGames = (input) => {
         gameEntryRound => {
           const [amount, color] = gameEntryRound.split(' ')
 
-          const hash = {}
+          const hash: Record<string, number> = {}
           hash[color] = Number(amount)
 
           return hash
@@ -168,11 +163,7 @@ const parseGames = (input) => {
   return gameRoundDices
 }
 
-const solution = () => {
+export const solution = () => {
   const games = parseGames(input)
   return getCubesPower(games)
-}
-
-module.exports = {
-  solution
 }
