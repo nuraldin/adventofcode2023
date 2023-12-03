@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "Small fun project to do the advent of code 2023 challenge",
   "main": "run-advent.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "santin.martin@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.10.2"
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.10.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.2"
   }
 }
