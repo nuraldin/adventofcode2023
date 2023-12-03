@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Small fun project to do the advent of code 2023 challenge",
   "main": "run-advent.ts",
-  "type": "module",
   "scripts": {
     "test": "jest"
   },

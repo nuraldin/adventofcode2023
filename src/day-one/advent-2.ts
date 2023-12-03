@@ -1,5 +1,4 @@
 import { input } from "./input";
-import { exampleInput } from "./exampleInput";
 
 const numbers: Record<string, number> = { 
   "one": 1 , 
