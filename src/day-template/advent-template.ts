@@ -1,7 +1,4 @@
-import { input } from "./input";
-import { exampleInput } from "./exampleInput";
-
-export const solution = (): number => {
-  // solution here
-  return 0
-};
+export const solution = (input: string): number => {
+  // put here your solution
+  return 0;
+}
