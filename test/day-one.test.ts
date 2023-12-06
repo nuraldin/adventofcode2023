@@ -1,4 +1,4 @@
-import { exampleInput1, advent1 } from "../../src/day-one";
+import { exampleInput1, advent1 } from "../src/day-one";
 
 describe("Day 1 of advent of code - problem 1", () => {
   test("example input result should be 142", () => {

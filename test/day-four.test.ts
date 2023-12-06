@@ -1,4 +1,4 @@
-import { exampleInput, advent7, advent8 } from "../../src/day-four";
+import { exampleInput, advent7, advent8 } from "../src/day-four";
 
 describe("Day 4 of advent of code", () => {
   describe("Problem 1", () => {
@@ -7,7 +7,7 @@ describe("Day 4 of advent of code", () => {
     })
   })
 
-  describe.only("Problem 2", () => {
+  describe("Problem 2", () => {
     test("example input result should be 30 scratchcards", () => {
       expect(advent8(exampleInput)).toEqual(30);
     });
