@@ -4,7 +4,7 @@ import { advent5, advent6, input3 } from './src/day-three';
 import { advent7, advent8, input4 } from './src/day-four';
 import { advent9, advent10, input5 } from './src/day-five';
 import { advent11, advent12, input6 } from './src/day-six';
-// import { advent13, advent14, input7 } from './src/day-seven';
+import { advent13, advent14, input7 } from './src/day-seven';
 // import { advent15, advent16, input8 } from './src/day-eight;
 // import { advent17, advent18, input9 } from './src/day-nine';
 // import { advent19, advent20, input10 } from './src/day-ten';
@@ -35,8 +35,8 @@ const options: { solution: (input: string) => number, input: string}[] = [
   { solution: advent10, input: input5 },
   { solution: advent11, input: input6 },
   { solution: advent12, input: input6 },
-  // { solution: advent1, input: input1 },
-  // { solution: advent2, input: input1 },
+  { solution: advent13, input: input7 },
+  // { solution: advent14, input: input1 },
   // { solution: advent3, input: input2 },
   // { solution: advent4, input: input2 },
   // { solution: advent5, input: input3 },
