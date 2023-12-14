@@ -1,3 +1,5 @@
+import { lcm } from "mathjs";
+
 const parseInput = (input: string) => {
   const splittedLines = input.split("\n");
   
@@ -36,18 +38,30 @@ const getStartingDirections = (directionsMap: Record<string, [string, string]>) 
 };
 
 const getSteps = ({instructions, directionsMap}: ReturnType<typeof parseInput>): number => {
-  let nextDirections = getStartingDirections(directionsMap);
-  
-  let nextInstructionIdx = 0;
-  let steps = 0;
-  while(!nextDirections.every(direction => direction.endsWith('Z'))) {
-    let currentInstruction = instructions[nextInstructionIdx];
-    nextDirections = nextDirections.map(direction => directionsMap[direction][instructionMap[currentInstruction]]);
-    nextInstructionIdx = nextInstructionIdx + 1 >= instructions.length ? 0 : nextInstructionIdx + 1;
-    steps++;
+  let startingDirections = getStartingDirections(directionsMap);
+  let allSteps: number[] = [];
+
+  for (const startingDirection of startingDirections) {
+    let steps = 0;
+    let instructionIdx = 0;
+    let currentInstruction = instructions[instructionIdx];
+
+
+    let nextDirection = startingDirection;
+    while(!nextDirection.endsWith("Z")) {
+      nextDirection = directionsMap[nextDirection][instructionMap[currentInstruction]];
+      instructionIdx = instructionIdx + 1 >= instructions.length ? 0 : instructionIdx + 1;
+      currentInstruction = instructions[instructionIdx];
+      steps++;
+    }
+
+    allSteps.push(steps);
   }
 
-  return steps;
+
+  const res = allSteps.reduce((acum, current) => lcm(acum, current));
+  console.log({ allSteps,  res })
+  return res;
 }
 
 export const solution = (input: string): number => {

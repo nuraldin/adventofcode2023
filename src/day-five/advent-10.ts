@@ -21,10 +21,7 @@ const mapValues = (currentIdx: number, input: string[], source: number[]): { cur
   }
 }
 
-const getLowestLocation = (input: string): number => {
-  const splittedLines = input.split("\n");
-
-  let seeds: number[] = [];
+const mapToLocation = (splittedLines: string[], seeds: number[]): number[] => {
   let soils: number[] = [];
   let fertilizers: number[] = [];
   let waters: number[] = [];
@@ -33,13 +30,10 @@ const getLowestLocation = (input: string): number => {
   let humidities: number[] = [];
   let locations: number[] = [];
 
-  for(let idx = 0; idx < splittedLines.length; ) {
+  for(let idx = 2; idx < splittedLines.length; ++idx) {
     let l = splittedLines[idx];
 
-    if ( l.includes("seeds") ) {
-      seeds = l.match(/\d+/g)!.map(seed => Number(seed));
-      console.log({ seeds });
-    } else if ( l.includes("seed-to-soil" ) ) {
+    if ( l.includes("seed-to-soil" ) ) {
       const { currentIdx, destination } = mapValues(idx + 1, splittedLines, seeds);
       idx = currentIdx;
       soils = destination;
@@ -74,10 +68,35 @@ const getLowestLocation = (input: string): number => {
       idx = currentIdx;
       locations = destination;
       console.log({ locations })
-    } 
+    }
+  } 
 
-    idx++;
+  return locations;
+}
+
+const getLowestLocation = (input: string): number => {
+  const splittedLines = input.split("\n");
+
+  let seedsLine = splittedLines[0].match(/\d+/g)!.map(seed => Number(seed));
+  let seedsMap = [];
+  for(let idx = 0; idx < seedsLine.length; idx += 2) {
+    seedsMap.push([seedsLine[idx], seedsLine[idx + 1]])
   }
+ 
+  let locations: number[] = [];
+  seedsMap.forEach(seedMap => {
+    let [ seedStart, seedRange ] = seedMap;
+
+    let seeds: number[] = [];
+    for(let idx = 0; idx < seedRange; idx++ ) {
+      seeds.push(seedStart + idx);
+    }
+
+    let seedRangeLocations = mapToLocation(splittedLines, seeds);
+    locations.push(seedRangeLocations.reduce((acum, location) => { 
+      return Number(location) < acum ? Number(location) : acum 
+    }, +Infinity))
+  })
 
   return locations.reduce((acum, location) => { 
     return Number(location) < acum ? Number(location) : acum 
