@@ -7,7 +7,8 @@
   "main": "run-advent.ts",
   "scripts": {
     "test": "jest",
-    "create-new-day": "ts-node ./src/scripts/create-new-day.ts"
+    "create-new-day": "ts-node ./create-new-day.ts",
+    "advent": "ts-node ./advent.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.10",
